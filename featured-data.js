@@ -10,10 +10,9 @@
 // Currently not displayed: the HOME caption shows the project title only.
 // To add a project, append another { id, media, heading } entry.
 window.FEATURED_PROJECTS = [
-  { id: 'dazed-beauty', media: [1, 0, 2], heading: 'FEATURED PROJECT' }, // 3枚
-  { id: 'teeth-magazine', media: [0, 1], heading: '' }, // 2枚・横並び
-  { id: 'mugler', media: [1], heading: '' },    // 1枚              
-  { id: 'supreme-lookbook', media: [0, 1], layout: 'side-by-side', heading: '' },
-  { id: 'the-face-pusha-t', media: [1], heading: '' }
-
+  { id: 'dazed-beauty', media: [1, 0, 2], heading: 'FEATURED PROJECT' },
+  { id: 'teeth-magazine', media: [0, 1] },
+  { id: 'mugler', media: [1] },
+  { id: 'supreme-lookbook', media: [0, 1] },
+  { id: 'the-face-pusha-t', media: [1] }
 ];
