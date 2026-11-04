@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no, email=no, address=no, date=no" />
+  <title>Information — NANASE ITO</title>
+  <meta name="description" content="Nanase Ito, Japanese makeup artist based in New York." />
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<!-- Layout = the Information page of horizontal scroll_01 (.info-page), shown as its own page. -->
+<body class="info-open">
+
+<div class="info-page" id="infoPage">
+  <div class="info-page__inner">
+    <a href="index.html" class="info-back">Back</a>
+
+    <p class="hp-note hp-name"><span class="hp-name__name">Nanase Ito</span><span class="hp-name__role">Makeup artist</span></p>
+
+    <div class="hp-bio">
+      <p>Nanase is a Japanese makeup artist based in NY. After training in makeup in Japan and gaining over six years of experience working in Tokyo, she moved to NYC in 2019 to expand her career. Inspired by her early love of painting, she approaches makeup as a form of creative expression, combining technical precision with artistic vision.</p>
+      <p>Since moving to New York, Nanase has worked on a wide variety of projects, including fashion shoots, runway shows, magazine editorials, commercial campaigns, and photo/video productions. Her work blends Japanese aesthetics with the dynamic energy of New York and Paris, resulting in distinctive, tailored looks for her clients.</p>
+    </div>
+
+    <p class="hp-note">For all enquiries:<br><a href="mailto:itonanase11077@gmail.com">itonanase11077@gmail.com</a></p>
+    <p class="hp-note">Instagram:<br><a href="https://www.instagram.com/nanaseitomakeup/" target="_blank" rel="noopener noreferrer">@nanaseitomakeup</a></p>
+
+    <p class="hp-copyright">© 2026 Nanase Ito</p>
+
+  </div>
+</div>
+
+<script>
+  // Back = browser history back to the page Information was opened from (HOME / Overview /
+  // Moving Image ...), but only when that page is on this site. Direct opens, reloads of a
+  // direct open, and arrivals from another site keep the link's own href (index.html).
+  (() => {
+    const back = document.querySelector('.info-back');
+    if (!back) return;
+    back.addEventListener('click', e => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // new tab etc.: normal link
+      let from = null;
+      try { from = document.referrer ? new URL(document.referrer) : null; } catch (_) {}
+      const sameSite = from && from.origin === location.origin && from.pathname !== location.pathname;
+      if (!sameSite || history.length < 2) return;
+      e.preventDefault();
+      history.back();
+    });
+  })();
+</script>
+
+</body>
+</html>

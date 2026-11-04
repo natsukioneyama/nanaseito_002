@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"   content="width=device-width, initial-scale=1.0, maximum-scale=2.0, viewport-fit=cover"/>
+  <meta name="format-detection" content="telephone=no, email=no, address=no, date=no" />
+  <title>NANASE ITO — Makeup artist (horizontal HOME demo)</title>
+  <meta name="description" content="Nanase Ito, Japanese makeup artist based in New York." />
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- NAV -->
+    <header class="nav" data-nav>
+      <div class="nav-inner">
+
+        <div class="nav-top">
+         <a class="brand" href="index.html" aria-label="Home">
+          Nanase Ito
+         </a>
+         <a class="brand-sub" href="index.html" aria-label="Home">
+          Makeup artist
+         </a>
+        </div>
+
+
+         <nav id="navMenu" class="nav-menu" aria-label="Primary">
+         <!-- Current project title: rendered and kept in sync with the scroll position by script.js -->
+         <div class="nav-current" id="navCurrent" aria-live="polite"></div>
+
+         <a class="nav-link" href="overview.html">
+         Overview
+         </a>
+         <a class="nav-link js-info" href="info.html">
+         Information
+         </a>
+         </nav>
+
+
+      </div>
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="main" id="content">
+      <section class="grid" aria-label="Gallery">
+       <!-- Cards come from featured-data.js + portfolio-data.js (rendered by script.js). -->
+       <div class="grid-inner" id="gallery"></div>
+      </section>
+    </main>
+
+    <!-- Mobile only (<= 860px): current project caption fixed below the images, same as Overview's caption bar. -->
+    <div class="m-caption" aria-live="polite"><div class="m-caption__inner" id="mobileCaption"></div></div>
+
+  </div>
+
+  <!-- Data files copied from site/ (unchanged). Image paths inside are relative to this folder. -->
+  <script src="portfolio-data.js"></script>
+  <script src="featured-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

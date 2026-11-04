@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Moving image work by makeup artist Nanase Ito.">
+  <title>Moving Image — NANASE ITO</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap">
+  <link rel="stylesheet" href="overview.css">
+  <script src="justified-layout.umd.js" defer></script>
+  <script src="overview-videos.js" defer></script>
+  <script src="overview.js" defer></script>
+</head>
+<body>
+  <div class="brand" id="brand">
+  <span class="brand-line">Nanase Ito</span>
+  <span class="brand-line">Makeup artist</span>
+</div>
+  <div class="header-bg" aria-hidden="true"></div>
+  <!-- Same header / Lightbox markup as overview.html; overview.js runs in "videos" mode (data-source). -->
+  <nav class="index-header-nav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="overview.html">Overview</a>
+    <a href="moving-image.html">Moving Image</a>
+    <a href="info.html">Information</a>
+  </nav>
+  <main id="overview"><div id="grid" class="mi-grid" data-source="videos" aria-label="Moving image"></div></main>
+  <footer class="bottom-nav" id="overview-nav">
+    <div class="caption" id="overview-caption" aria-live="polite"></div>
+  </footer>
+  <section id="modal" class="overlay" role="dialog" aria-modal="true" aria-label="Portfolio media viewer" hidden>
+<div class="modal-brand">
+<span class="brand-line">Nanase Ito</span>
+<span class="brand-line">Makeup artist</span>
+</div>
+    <div id="stage" class="stage"></div>
+    <div class="modal-footer"><div id="modal-caption" class="caption" aria-live="polite"></div><button id="modal-close" aria-label="Close media viewer">×</button></div>
+  </section>
+</body>
+</html>

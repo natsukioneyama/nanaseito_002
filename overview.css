@@ -1,0 +1,196 @@
+:root { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #000; --bg: #fff; background: var(--bg); font-size: 14px; --edge: 14px; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, a { color: inherit; font: inherit; -webkit-tap-highlight-color: transparent; }
+button { padding: 0; border: 0; background: none; cursor: pointer; appearance: none; -webkit-appearance: none; }
+a { text-decoration: none; }
+button:focus-visible, a:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+.no-ring:focus-visible { outline: none; }
+[hidden] { display: none !important; }
+/* Nanase header: same design and values as index.css .site-header (name / profession
+   in two rows top-left, nav top-right, frosted band). Element ids/classes are kept
+   because overview.js inerts #brand and .index-header-nav while the Lightbox is open.
+   --header-edge is the header's own side margin; --edge stays the grid's. */
+:root {
+  --header-edge: 24px;
+  /* ブランド表記: HOME / Information (styles.css) と同じ値。Cormorant Garamond 300 は
+     Helvetica より小さく見えるため、旧サイズ 28px / 16px の 8/7 倍（キャップハイトが揃う）。 */
+  --brand-font: "Cormorant Garamond", "Helvetica Neue", Helvetica, Arial, serif;
+  --brand-font-weight: 300;
+  --brand-name-size: 32px;
+  --brand-role-size: 18px;
+  /* ナビ文字サイズ = HOME (styles.css) の .nav-link と同値:
+     PC 0.7rem(=11.2px, HOME は root 16px) / 768–860px 13px / 767px 以下 10px（Helvetica Neue 400）。
+     Overview は :root が 14px なので rem ではなく px で指定。 */
+  --nav-size: 11.2px;
+  --header-top: max(18px, env(safe-area-inset-top));
+  --header-pad-bottom: 12px;
+  --header-height: calc(var(--header-top) + (var(--brand-name-size) + var(--brand-role-size)) * 1.2 + var(--header-pad-bottom));
+  --grid-top: calc(var(--header-height) + 20px);
+}
+/* index / overview / modal 共通のブランド表記（Nanase: 黒文字、difference blendは不使用） */
+.brand, .modal-brand {
+  position: fixed;
+  left: max(var(--header-edge), env(safe-area-inset-left));
+  top: var(--header-top);
+  text-align: left;
+  line-height: 1.2;
+  font-family: var(--brand-font);
+  font-weight: var(--brand-font-weight);
+  font-style: normal;
+  z-index: 10;
+  padding-top: 0;
+}
+.brand { color: #000; }
+/* Nanase: full-width frosted header band behind .brand + .index-header-nav */
+.header-bg {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9;
+  height: var(--header-height);
+  background: rgba(255, 255, 255, 0.555);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  pointer-events: none;
+}
+
+/* Nanase: name over profession (two rows) */
+.brand-line { display: block; font-size: var(--brand-name-size); }
+.brand-line + .brand-line { font-size: var(--brand-role-size); }
+/* Nanase: header nav top-right, bottom-aligned with the profession line */
+.index-header-nav {
+  display: flex; gap: 10px;
+  position: fixed; z-index: 10; color: #000;
+  right: max(var(--header-edge), env(safe-area-inset-right));
+  top: calc(var(--header-height) - var(--header-pad-bottom) - var(--nav-size) * 1.2);
+  font-size: var(--nav-size); line-height: 1.2; white-space: nowrap;
+  font-weight: normal;
+}
+
+#index-modal-caption {
+  font-size: 10px;
+}
+
+@media (min-width: 768px) and (max-width: 860px) { :root { --nav-size: 13px; } }
+/* Moving Image (moving-image.html): 動画3本の均等3カラム。各セルは動画自身の縦横比
+   (--ar, overview.js) で高さが決まるので余白（レターボックス）が出ない。
+   間隔は Overview の Justified Layout (boxSpacing 12px) と同じ。 */
+#grid.mi-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px; align-items: start;
+}
+#grid.mi-grid .jl-item { position: static; width: 100%; aspect-ratio: var(--ar); }
+/* 768px 以上は overview.js が Justified Layout で1行に配置（高さ統一）。下の gap はその間隔として読まれる。
+   768–1023px: 間隔を 1024px で 12px になる比率で縮小 */
+@media (max-width: 1023px) { #grid.mi-grid { gap: 1.171875vw; } } /* = 12px × 幅 / 1024px */
+/* 767px 以下: 縦1列、左右余白は Overview モバイルと同じ (--edge 10px) */
+@media (max-width: 767px) { #grid.mi-grid { grid-template-columns: 1fr; gap: 12px; } }
+
+#overview { padding: var(--grid-top) var(--edge) 64px; }
+#grid { position: relative; }
+.jl-item { display: block; margin: 0; }
+/* hoverの拡大はimg/video側で行う。wrapper自体のサイズは固定し、hover判定の境界がズレないようにする */
+.jl-item img, .jl-item video { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: center; transition: transform 180ms ease; }
+.jl-item:focus-visible { z-index: 2; }
+.jl-item:focus-visible img, .jl-item:focus-visible video { transform: scale(1.065); }
+.jl-item.selected { z-index: 2; }
+.jl-item.selected img, .jl-item.selected video { transform: scale(0.85); }
+/* hover-groupはoverview.jsが同一project内の全thumbnailに付与。タッチのtap-to-previewにも使うためmedia queryで絞らない */
+.jl-item.hover-group { z-index: 2; }
+.jl-item.hover-group img, .jl-item.hover-group video { transform: scale(0.85); }
+.bottom-nav, .modal-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 9px max(var(--edge), env(safe-area-inset-right)) max(9px, env(safe-area-inset-bottom)) max(var(--edge), env(safe-area-inset-left)); min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size:11px;   text-transform: uppercase;}
+.bottom-nav { z-index: 5; background: var(--bg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.bottom-nav[inert], .brand[inert], .brand[inert] ~ .header-bg { visibility: hidden; }
+.caption { line-height: 1.25; min-height: 30px; }
+.caption span { display: block; }
+
+.overlay { position: fixed; inset: 0; z-index: 20; background: rgba(245,245,245,.72); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+/* #modalは横drag操作のみのため縦scrollを無効化 */
+#modal { touch-action: none; overscroll-behavior-y: none; }
+/* Nanase: fully opaque white lightbox background (overrides .overlay translucency) */
+#modal { background: #FFFFFF; }
+.stage { position: absolute; inset: var(--header-height) 30px 54px; overflow: hidden; touch-action: none; }
+.modal-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; user-select: none; -webkit-user-select: none; }
+.modal-footer button { font-size: 22px; min-width: 44px; min-height: 44px; text-align: right; }
+@media (max-width: 767px) {
+  :root { --edge: 10px; font-size: 14px; }
+  :root {
+    --header-edge: 20px;
+    --brand-name-size: 21px;
+    --brand-role-size: 15px;
+    --nav-size: 10px;
+    --header-top: max(12px, env(safe-area-inset-top));
+    --header-pad-bottom: 8px;
+  }
+  .stage { inset: var(--header-height) 0 64px; }
+}
+
+/* reduced motion設定時はhoverのscale transitionを無効化 */
+@media (prefers-reduced-motion: reduce) { .jl-item img, .jl-item video { transition: none; } }
+
+/* ==========================================================================
+   Lightbox custom video controls (sv) — ported from the Kazuko Kitaoka site
+   (kazukokitaoka01/testkk01/styles.css "15) Custom video controls (sv)").
+   .modal-video fills .stage like .modal-media images; .gm-video-wrap is sized to the
+   video's aspect ratio (--ar, set by overview.js) with container units, so the controls
+   run along the video's own bottom edge.
+   ========================================================================== */
+.modal-video {
+  display: flex; align-items: center; justify-content: center;
+  container-type: size;
+}
+.gm-video-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(100cqw, 100cqh * var(--ar));
+  height: min(100cqh, 100cqw / var(--ar));
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+/* JS が付与：準備完了で表示 */
+.gm-video-wrap.is-ready { opacity: 1; }
+.gm-video-wrap video {
+  display: block; width: 100%; height: 100%; object-fit: contain;
+  user-select: none; -webkit-user-select: none;
+}
+/* ネイティブの操作UIは使わない（iOS Safari の再生ボタン等も含め非表示） */
+.gm-video-wrap video::-webkit-media-controls,
+.gm-video-wrap video::-webkit-media-controls-start-playback-button,
+.gm-video-wrap video::-webkit-media-controls-panel { display: none !important; -webkit-appearance: none; }
+
+/* コントロール本体（動画の下端に沿わせる） */
+.sv-controls {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 6px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 10;
+  background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0));
+  border-radius: 0 0 6px 6px;
+}
+/* PC：ホバーで表示 */
+.gm-video-wrap:hover .sv-controls { opacity: 1; pointer-events: auto; }
+/* JS で付与：表示 */
+.sv-controls.is-visible { opacity: 1; pointer-events: auto; }
+/* プログレスバー（クリックでシーク） */
+.sv-progress {
+  position: relative; height: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden; cursor: pointer; touch-action: none;
+}
+/* 進捗バー（JS で width を更新） */
+.sv-progress__bar { width: 0; height: 100%; background: #fff; }
+/* ボタン行（左右配置） */
+.sv-nav { display: flex; justify-content: space-between; align-items: center; }
+.sv-nav__right { display: flex; gap: 14px; }
+/* ボタン共通（白文字） */
+.sv-btn {
+  border: none; background: transparent; color: #fff;
+  font-size: 11px; letter-spacing: 0.06em;
+  padding: 4px 0; cursor: pointer;
+}
+/* モバイル用：コントロールの余白を少し減らす */
+@media (max-width: 480px) { .sv-controls { padding: 8px 12px; } }
+/* hover なし（タッチ）：初期非表示、.is-visible で表示 */
+@media (hover: none) and (pointer: coarse) {
+  .gm-video-wrap .sv-controls { opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+  .gm-video-wrap .sv-controls.is-visible { opacity: 1; pointer-events: auto; }
+}
