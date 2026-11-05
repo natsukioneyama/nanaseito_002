@@ -113,8 +113,8 @@ button:focus-visible, a:focus-visible { outline: 1px solid currentColor; outline
   :root { --edge: 10px; font-size: 14px; }
   :root {
     --header-edge: 20px;
-    --brand-name-size: 21px;
-    --brand-role-size: 15px;
+    --brand-name-size: 26px;
+    --brand-role-size: 18px;
     --nav-size: 10px;
     --header-top: max(12px, env(safe-area-inset-top));
     --header-pad-bottom: 8px;

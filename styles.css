@@ -71,8 +71,8 @@ body{
 }
 @media (max-width: 767px){
   :root{
-    --brand-name-size: 21px;
-    --brand-role-size: 15px;
+    --brand-name-size: 26px;
+    --brand-role-size: 18px;
   }
 }
 
