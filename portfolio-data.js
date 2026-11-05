@@ -163,6 +163,16 @@ window.PORTFOLIO_PROJECTS = [
       { "type": "image", "thumb": "thmbs/kith-x-adidas/02.webp", "full": "img/kith-x-adidas/02.webp", "alt": "KITH X ADIDAS", "width": 263, "height": 350, "dataW": 902, "dataH": 1200 }    ]
   },
     {
+    "id": "supreme-popeye-magazine",
+    "category": "overview",
+    "title": "SUPREME X POPEYE MAGAZINE",
+    "line1": "Jiro Konami",
+    "line2": "",
+    "media": [
+      { "type": "image", "thumb": "thmbs/supreme-popeye-magazine/01.webp", "full": "img/supreme-popeye-magazine/01.webp", "alt": "SUPREME X POPEYE MAGAZINE", "width": 280, "height": 350, "dataW": 960, "dataH": 1200 }
+    ]
+  },
+    {
     "id": "supreme-them-magazine",
     "category": "overview",
     "title": "SUPREME X THEM MAGAZINE",
@@ -179,18 +189,6 @@ window.PORTFOLIO_PROJECTS = [
     "line2": "",
     "media": [
       { "type": "image", "thumb": "thmbs/supreme-lookbook/01.webp", "full": "img/supreme-lookbook/01.webp", "alt": "SUPREME LOOKBOOK", "width": 281, "height": 350, "dataW": 964, "dataH": 1200 },
-      { "type": "image", "thumb": "thmbs/supreme-lookbook/02.webp", "full": "img/supreme-lookbook/02.webp", "alt": "SUPREME LOOKBOOK", "width": 215, "height": 350, "dataW": 737, "dataH": 1200 },
-      { "type": "image", "thumb": "thmbs/supreme-lookbook/03.webp", "full": "img/supreme-lookbook/03.webp", "alt": "SUPREME LOOKBOOK", "width": 280, "height": 350, "dataW": 960, "dataH": 1200 }
-    ]
-  },
-  {
-    "id": "supreme-popeye-magazine",
-    "category": "overview",
-    "title": "SUPREME X POPEYE MAGAZINE",
-    "line1": "Jiro Konami",
-    "line2": "",
-    "media": [
-      { "type": "image", "thumb": "thmbs/supreme-popeye-magazine/01.webp", "full": "img/supreme-popeye-magazine/01.webp", "alt": "SUPREME X POPEYE MAGAZINE", "width": 280, "height": 350, "dataW": 960, "dataH": 1200 }
-    ]
+      { "type": "image", "thumb": "thmbs/supreme-lookbook/02.webp", "full": "img/supreme-lookbook/02.webp", "alt": "SUPREME LOOKBOOK", "width": 215, "height": 350, "dataW": 737, "dataH": 1200 }    ]
   }
 ];
